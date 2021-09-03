@@ -20,15 +20,15 @@ class User(Base):
 
 class Follower(Base):
     __tablename__ = 'follower'
-    user_from_id = Column(String(250))
-    user_to_id = Column(String(250))
+    user_from_id = Column(String(250), ForeignKey('user.id'),primary_key=True)
+    user_to_id = Column(String(250), ForeignKey('user.id'))
 
 class Comment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True)
     comment_text = Column(String(250))
-    author_id = Column(Integer)
-    post_id = Column(Integer)
+    author_id = Column(Integer,ForeignKey('user.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
 
 class Post(Base):
     __tablename__ = 'post'
@@ -40,7 +40,7 @@ class Media(Base):
     id = Column(Integer, primary_key=True)
     type = Column(Enum)  
     url = Column(String(250))  
-    post_id(String(Integer)) 
+    post_id = Column(Integer, ForeignKey('post.id')) 
    
     def to_dict(self):
         return {}
