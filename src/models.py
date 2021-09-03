@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -23,7 +23,6 @@ class Follower(Base):
     user_from_id = Column(String(250))
     user_to_id = Column(String(250))
 
-
 class Comment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True)
@@ -31,23 +30,18 @@ class Comment(Base):
     author_id = Column(Integer)
     post_id = Column(Integer)
 
-
 class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_to_id = Column(String(250))    
-
-
 
 class Media(Base):
     __tablename__ = 'media'
     id = Column(Integer, primary_key=True)
     type = Column(Enum)  
     url = Column(String(250))  
-    post_id(String(Integer) 
+    post_id(String(Integer)) 
    
-
-
     def to_dict(self):
         return {}
 
